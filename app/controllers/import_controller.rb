@@ -16,6 +16,8 @@ class ImportController < ApplicationController
   end
 
   def authorized
+    require 'oauth/consumer'
+
     @request_token = session[:request_token]
     logger.info "Using request token " + @request_token.token
     @access_token=@request_token.get_access_token
