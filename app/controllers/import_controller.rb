@@ -16,7 +16,7 @@ class ImportController < ApplicationController
   end
 
   def authorized
-    @request_token = session[:request_token]
+
     @access_token=@request_token.get_access_token
 
     t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
