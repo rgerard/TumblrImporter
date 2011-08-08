@@ -1,5 +1,7 @@
 class ImportController < ApplicationController
   def request_auth
+    require 'oauth/consumer'
+
     consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
     secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
     @consumer=OAuth::Consumer.new( consumer_key, secret, {
@@ -8,11 +10,39 @@ class ImportController < ApplicationController
 
     @request_token=@consumer.get_request_token
     session[:request_token]=@request_token
-    redirect_to @request_token.authorize_url
+
+    auth_url = "http://www.tumblr.com/oauth/authorize?oauth_token=" + @request_token.token
+    redirect_to auth_url
   end
 
   def authorized
-    logger.info "YES, authorized!"
+    @request_token = session[:request_token]
+    @access_token=@request_token.get_access_token
+
+    t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
+
+    # build the POST params string
+    post_params = {
+      :email => "ryan.gerard@gmail.com",
+      :pass => "rgerard00",
+      :type => "regular",
+      :title => "testing",
+      :body => "more testing",
+      :format => "html"
+	  }
+
+    # Send the request
+    @response=@access_token.post(t_url, post_params)
+
+    case response
+    when Net::HTTPSuccess, Net::HTTPRedirection
+	    # OK
+		  logger.info "Success!"
+    else
+	    logger.info "Failure!"
+      logger.info response.to_s
+    end
+
   end
 
   def create
