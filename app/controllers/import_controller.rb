@@ -28,15 +28,13 @@ class ImportController < ApplicationController
 
     # build the POST params string
     post_params = {
-      :email => "ryan.gerard@gmail.com",
-      :pass => "rgerard00",
-      :type => "regular",
+      :type => "text",
       :title => "testing",
-      :body => "more testing",
-      :format => "html"
+      :body => "more testing"
 	  }
 
     # Send the request
+    logger.info "Posting new item to blog"
     @response=@access_token.post(t_url, post_params)
 
     case response
