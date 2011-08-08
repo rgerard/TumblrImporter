@@ -24,6 +24,7 @@ class ImportController < ApplicationController
 
     @access_token=@request_token.get_access_token
 
+    logger.info "Got access token"
     t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
 
     # build the POST params string
