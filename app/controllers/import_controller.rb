@@ -1,5 +1,22 @@
 class ImportController < ApplicationController
+  def request_auth
+    consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
+    secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
+    @consumer=OAuth::Consumer.new( consumer_key, secret, {
+      :site => "http://www.tumblr.com/oauth/request_token"
+    })
+
+    @request_token=@consumer.get_request_token
+    session[:request_token]=@request_token
+    redirect_to @request_token.authorize_url
+  end
+
+  def authorized
+    logger.info "YES, authorized!"
+  end
+
   def create
+    request_auth()
     blog_url = "http://www.ryangerard.net/1/feed"
 
     feed = get_feed(blog_url)
@@ -87,18 +104,6 @@ class ImportController < ApplicationController
       logger.info "&&&&&&&&&&&&&&&&&&&&&&"
 
       break if count > 0
-
-      consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
-      secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
-      @consumer=OAuth::Consumer.new( consumer_key,secret, {
-        :site=>"http://www.tumblr.com/oauth/request_token"
-      })
-      @request_token=@consumer.get_request_token
-      session[:request_token]=@request_token
-      redirect_to @request_token.authorize_url
-
-      @access_token=@request_token.get_access_token
-      @photos=@access_token.get('/photos.xml')
 
       # build the POST params string
 	    post_params = {

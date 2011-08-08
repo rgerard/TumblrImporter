@@ -7,6 +7,8 @@ TumblrImporter::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   match 'import' => 'import#create'
+  match 'import/auth' => 'import#request_auth'
+  match 'import/authorized' => 'import#authorized'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
