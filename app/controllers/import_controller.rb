@@ -20,6 +20,8 @@ class ImportController < ApplicationController
 
     @request_token = session[:request_token]
     logger.info "Using request token " + @request_token.token
+    @request_token.consumer.options[:site] = "http://www.tumblr.com"
+
     @access_token=@request_token.get_access_token
 
     t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
