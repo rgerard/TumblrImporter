@@ -25,55 +25,36 @@ class ImportController < ApplicationController
     @request_token = session[:request_token]
     logger.info "Using request token " + @request_token.token
 
-
     if params[:oauth_token] && params[:oauth_verifier]
       @access_token=@request_token.get_access_token({:oauth_verifier => params[:oauth_verifier]})
+      session[:access_token]=@access_token
     else
       logger.info "Missing critical URL params"
     end
 
     logger.info "Got access token"
-    t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
 
-    # build the POST params string
-    post_params = {
-      :type => "text",
-      :title => "testing",
-      :body => "more testing"
-	  }
-
-    # Send the request
-    logger.info "Posting new item to blog"
-    @response=@access_token.post(t_url, post_params)
-
-    case response
-    when Net::HTTPSuccess, Net::HTTPRedirection
-	    # OK
-		  logger.info "Success!"
-    else
-	    logger.info "Failure!"
-      logger.info response.to_s
-    end
+    create_blog_migration
 
   end
 
-  def create
-    request_auth()
+  def create_blog_migration
     blog_url = "http://www.ryangerard.net/1/feed"
 
     feed = get_feed(blog_url)
-    feed_arr = parse_feed(feed)
+    @feed_arr = parse_feed(feed)
 
-    feed_arr.each do |p|
+    @feed_arr.each do |p|
       logger.info "+++++++++++++++++++++++"
       logger.info p["title"].to_s
       logger.info p["pubDate"].to_s
     end
 
-    write_posts_to_tumblr(feed_arr)
+    #session[:feed_arr]=@feed_arr
+    write_posts_to_tumblr(@feed_arr)
 
     respond_to do |format|
-      format.html # create.html.erb
+      format.html # authorized.html.erb
     end
   end
 
@@ -133,37 +114,27 @@ class ImportController < ApplicationController
 
   def write_posts_to_tumblr(posts)
 
-    require 'net/http'
-    require 'uri'
+    logger.info "Starting write"
+    t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
 
-    t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com//"
+    logger.info "Getting access token"
+    @access_token = session[:access_token]
 
-	  uri = URI.parse(t_url)
-	  http = Net::HTTP.new(uri.host, 80)
-
-    count = 0;
+    count = 0
     posts.each do |p|
       logger.info "&&&&&&&&&&&&&&&&&&&&&&"
 
-      break if count > 0
-
       # build the POST params string
 	    post_params = {
-        :email => "ryan.gerard@gmail.com",
-        :pass => "rgerard00",
-        :type => "regular",
+        :type => "text",
         :date => p["pubDate"].to_s,
         :title => p["title"].to_s,
-        :body => p["encoded"].to_s,
-        :format => "html"
+        :body => p["encoded"].to_s
 	    }
 
-	    # Create the POST request
-	    request = Net::HTTP::Post.new(uri.request_uri)
-	    request.body = post_params
-
 	    # Send the request
-	    response = http.request(request)
+      logger.info "Posting new item to blog"
+      @response=@access_token.post(t_url, post_params)
 
       case response
       when Net::HTTPSuccess, Net::HTTPRedirection
@@ -174,7 +145,6 @@ class ImportController < ApplicationController
         logger.info response.to_s
       end
 
-      count = count + 1
     end
 
   end
