@@ -5,14 +5,16 @@ class ImportController < ApplicationController
     consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
     secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
     @consumer=OAuth::Consumer.new( consumer_key, secret, {
-      :site => "http://www.tumblr.com/oauth/request_token"
+      :site => "http://www.tumblr.com",
+      :request_token_path => "/oauth/request_token",
+      :access_token_path  => "/oauth/access_token",
+      :authorize_path     => "/oauth/authorize"
     })
 
     @request_token=@consumer.get_request_token
     session[:request_token]=@request_token
 
-    auth_url = "http://www.tumblr.com/oauth/authorize?oauth_token=" + @request_token.token
-    redirect_to auth_url
+    redirect_to @request_token.authorize_url
   end
 
   def authorized
@@ -20,7 +22,6 @@ class ImportController < ApplicationController
 
     @request_token = session[:request_token]
     logger.info "Using request token " + @request_token.token
-    @request_token.consumer.options[:site] = "http://www.tumblr.com"
 
     @access_token=@request_token.get_access_token
 
