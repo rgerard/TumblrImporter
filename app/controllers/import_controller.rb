@@ -6,6 +6,8 @@ class ImportController < ApplicationController
     secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
     @consumer=OAuth::Consumer.new( consumer_key, secret, {
       :site => "http://www.tumblr.com",
+      :scheme             => :header,
+      :http_method        => :post,
       :request_token_path => "/oauth/request_token",
       :access_token_path  => "/oauth/access_token",
       :authorize_path     => "/oauth/authorize"
@@ -23,7 +25,12 @@ class ImportController < ApplicationController
     @request_token = session[:request_token]
     logger.info "Using request token " + @request_token.token
 
-    @access_token=@request_token.get_access_token
+
+    if params[:oauth_token] && params[:oauth_verifier]
+      @access_token=@request_token.get_access_token({:oauth_verifier => params[:oauth_verifier]})
+    else
+      logger.info "Missing critical URL params"
+    end
 
     logger.info "Got access token"
     t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
