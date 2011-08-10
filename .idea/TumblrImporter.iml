@@ -17,13 +17,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.9, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.9, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.2.2, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activeresource (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activerecord (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v0.8.7, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.14.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.3, ruby-1.8.7-p174) [gem]" level="application" />
@@ -32,10 +32,12 @@
     <orderEntry type="library" scope="PROVIDED" name="builder (v2.1.2, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="abstract (v1.0.0, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.5.7, ruby-1.8.7-p174) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oauth (v0.4.4, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.5.0, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-mount (v0.6.14, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v2.0.9, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v1.16, ruby-1.8.7-p174) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="libxml-ruby (v1.1.2, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v3.0.6, ruby-1.8.7-p174) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.6.6, ruby-1.8.7-p174) [gem]" level="application" />

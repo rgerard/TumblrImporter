@@ -141,7 +141,9 @@ class ImportController < ApplicationController
 		    logger.info "Success!"
       else
 		    logger.info "Failure!"
-        logger.info response.to_s
+        logger.info response.message
+        logger.info response.body
+        logger.info response.response_code
       end
 
     end
