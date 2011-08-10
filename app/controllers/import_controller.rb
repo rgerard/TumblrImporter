@@ -45,11 +45,11 @@ class ImportController < ApplicationController
     feed = get_feed(blog_url)
     @feed_arr = parse_feed(feed)
 
-    @feed_arr.each do |p|
-      logger.info "+++++++++++++++++++++++"
-      logger.info p["title"].to_s
-      logger.info p["pubDate"].to_s
-    end
+    #@feed_arr.each do |p|
+    #  logger.info "+++++++++++++++++++++++"
+    #  logger.info p["title"].to_s
+    #  logger.info p["pubDate"].to_s
+    #end
 
     #session[:feed_arr]=@feed_arr
     write_posts_to_tumblr(@feed_arr)
@@ -119,6 +119,7 @@ class ImportController < ApplicationController
     #t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
     t_url =  "http://api.tumblr.com/v2/blog/" + session[:tumblr_url] + "/post";
 
+    logger.info "tumblr url: " + t_url
     @access_token = session[:access_token]
 
     posts.each do |p|
