@@ -35,7 +35,7 @@
       <file leaf-file-name="import_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/import_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="78" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.14235501">
+            <state line="134" column="29" selection-start="3365" selection-end="3365" vertical-scroll-proportion="0.5746924">
               <folding />
             </state>
           </provider>
@@ -640,7 +640,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/import_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="78" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.14235501">
+        <state line="134" column="29" selection-start="3365" selection-end="3365" vertical-scroll-proportion="0.5746924">
           <folding />
         </state>
       </provider>

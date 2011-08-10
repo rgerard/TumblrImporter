@@ -90,9 +90,9 @@ class ImportController < ApplicationController
 
       post = {}
       p.children.each do |f|
-        logger.info "----------------------"
-        logger.info f.name
-        logger.info f.first.content
+        #logger.info "----------------------"
+        #logger.info f.name
+        #logger.info f.first.content
 
         if f.name == "title"
           post["title"] = f.first.content
@@ -131,6 +131,8 @@ class ImportController < ApplicationController
         :title => p["title"].to_s,
         :body => p["encoded"].to_s
 	    }
+
+      logger.info post_params
 
 	    # Send the request
       logger.info "Posting new item to blog"
