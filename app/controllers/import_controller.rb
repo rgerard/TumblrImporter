@@ -49,12 +49,6 @@ class ImportController < ApplicationController
     feed = get_feed(blog_url)
     @feed_arr = parse_feed(feed)
 
-    #@feed_arr.each do |p|
-    #  logger.info "+++++++++++++++++++++++"
-    #  logger.info p["title"].to_s
-    #  logger.info p["pubDate"].to_s
-    #end
-
     write_posts_to_tumblr(@feed_arr)
 
     respond_to do |format|
@@ -73,10 +67,9 @@ class ImportController < ApplicationController
     case response
     when Net::HTTPSuccess, Net::HTTPRedirection
 		  # OK
-		  logger.info "Success!"
       return response.body
     else
-		  logger.info "Failure!"
+		  logger.info "Failure getting feed at url " + feed_url
       return ''
     end
 
@@ -88,14 +81,9 @@ class ImportController < ApplicationController
     parser, parser.string = XML::Parser.new, feed
     doc, posts = parser.parse, []
     doc.find('//channel/item').each do |p|
-      logger.info "===================="
-      logger.info p.name
 
       post = {}
       p.children.each do |f|
-        #logger.info "----------------------"
-        #logger.info f.name
-        #logger.info f.first.content
 
         if f.name == "title"
           post["title"] = f.first.content
