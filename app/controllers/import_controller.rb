@@ -43,13 +43,13 @@ class ImportController < ApplicationController
 
   def create_blog_migration
     #blog_url = "http://www.ryangerard.net/1/feed"
-    logger.info session[:feed_url]
+    #logger.info session[:feed_url]
 
     blog_url = session[:feed_url]
     feed = get_feed(blog_url)
     @feed_arr = parse_feed(feed)
 
-    write_posts_to_tumblr(@feed_arr)
+    @feed_arr = write_posts_to_tumblr(@feed_arr)
 
     respond_to do |format|
       format.html # authorized.html.erb
@@ -106,6 +106,7 @@ class ImportController < ApplicationController
 
   def write_posts_to_tumblr(posts)
 
+    post_success = []
     logger.info "Starting write"
     #t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
     t_url =  "http://api.tumblr.com/v2/blog/" + session[:tumblr_url] + "/post"
@@ -125,20 +126,22 @@ class ImportController < ApplicationController
 
 	    # Send the request
       logger.info "Posting new item to blog"
-      @response=@access_token.post(t_url, post_params)
+      response=@access_token.post(t_url, post_params)
 
       case response
       when Net::HTTPSuccess, Net::HTTPRedirection
 		    # OK
 		    logger.info "Success!"
+        post_success << post
       else
 		    logger.info "Failure!"
         logger.info response.message
         logger.info response.body
-        logger.info response.response_code
       end
 
     end
+
+    return post_success
 
   end
 end
