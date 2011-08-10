@@ -132,7 +132,7 @@ class ImportController < ApplicationController
       when Net::HTTPSuccess, Net::HTTPRedirection
 		    # OK
 		    logger.info "Success!"
-        post_success << post
+        post_success << p
       else
 		    logger.info "Failure!"
         logger.info response.message
