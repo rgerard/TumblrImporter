@@ -1,9 +1,12 @@
 class ImportController < ApplicationController
   def request_auth
-    require 'oauth/consumer'
+
+    session[:feed_url]=params[:feed]
+    session[:tumblr_url]=params[:blog]
 
     consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
     secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"
+
     @consumer=OAuth::Consumer.new( consumer_key, secret, {
       :site => "http://www.tumblr.com",
       :scheme             => :header,
@@ -15,32 +18,33 @@ class ImportController < ApplicationController
 
     @request_token=@consumer.get_request_token
     session[:request_token]=@request_token
-    session[:feed_url]=params[:feed]
-    session[:tumblr_url]=params[:blog]
 
     redirect_to @request_token.authorize_url
   end
 
   def authorized
-    require 'oauth/consumer'
 
     @request_token = session[:request_token]
-    logger.info "Using request token " + @request_token.token
 
     if params[:oauth_token] && params[:oauth_verifier]
       @access_token=@request_token.get_access_token({:oauth_verifier => params[:oauth_verifier]})
       session[:access_token]=@access_token
+
+      logger.info "Got access token"
+      create_blog_migration
     else
       logger.info "Missing critical URL params"
+
+      respond_to do |format|
+        format.html # authorized.html.erb
+      end
     end
-
-    logger.info "Got access token"
-    create_blog_migration
-
   end
 
   def create_blog_migration
     #blog_url = "http://www.ryangerard.net/1/feed"
+    logger.info session[:feed_url]
+
     blog_url = session[:feed_url]
     feed = get_feed(blog_url)
     @feed_arr = parse_feed(feed)
@@ -51,7 +55,6 @@ class ImportController < ApplicationController
     #  logger.info p["pubDate"].to_s
     #end
 
-    #session[:feed_arr]=@feed_arr
     write_posts_to_tumblr(@feed_arr)
 
     respond_to do |format|
