@@ -1,0 +1,7 @@
+<%= form_tag "/import/auth" do %>
+  <%= label_tag(:q, "RSS Feed:") %>
+  <%= text_field_tag(:feed) %>
+  <%= label_tag(:q, "Tumblr Blog Domain:") %>
+  <%= text_field_tag(:blog) %>
+  <%= submit_tag "Submit" %>
+<% end %>

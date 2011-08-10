@@ -15,6 +15,8 @@ class ImportController < ApplicationController
 
     @request_token=@consumer.get_request_token
     session[:request_token]=@request_token
+    session[:feed_url]=params[:feed]
+    session[:tumblr_url]=params[:blog]
 
     redirect_to @request_token.authorize_url
   end
@@ -33,14 +35,13 @@ class ImportController < ApplicationController
     end
 
     logger.info "Got access token"
-
     create_blog_migration
 
   end
 
   def create_blog_migration
-    blog_url = "http://www.ryangerard.net/1/feed"
-
+    #blog_url = "http://www.ryangerard.net/1/feed"
+    blog_url = session[:feed_url]
     feed = get_feed(blog_url)
     @feed_arr = parse_feed(feed)
 
@@ -115,14 +116,12 @@ class ImportController < ApplicationController
   def write_posts_to_tumblr(posts)
 
     logger.info "Starting write"
-    t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
+    #t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
+    t_url =  "http://api.tumblr.com/v2/blog/" + session[:tumblr_url] + "/post";
 
-    logger.info "Getting access token"
     @access_token = session[:access_token]
 
-    count = 0
     posts.each do |p|
-      logger.info "&&&&&&&&&&&&&&&&&&&&&&"
 
       # build the POST params string
 	    post_params = {
