@@ -132,8 +132,6 @@ class ImportController < ApplicationController
         :body => p["encoded"].to_s
 	    }
 
-      logger.info post_params
-
 	    # Send the request
       logger.info "Posting new item to blog"
       @response=@access_token.post(t_url, post_params)
