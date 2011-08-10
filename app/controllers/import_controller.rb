@@ -117,7 +117,7 @@ class ImportController < ApplicationController
 
     logger.info "Starting write"
     #t_url = "http://api.tumblr.com/v2/blog/ryangerard.tumblr.com/post"
-    t_url =  "http://api.tumblr.com/v2/blog/" + session[:tumblr_url] + "/post";
+    t_url =  "http://api.tumblr.com/v2/blog/" + session[:tumblr_url] + "/post"
 
     logger.info "tumblr url: " + t_url
     @access_token = session[:access_token]
