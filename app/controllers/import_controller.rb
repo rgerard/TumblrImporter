@@ -2,8 +2,23 @@ class ImportController < ApplicationController
   def request_auth
 
     if params[:feed] != '' && params[:blog] != ''
-      session[:feed_url]=params[:feed]
-      session[:tumblr_url]=params[:blog]
+
+      # Cleanup the params
+      feed = params[:feed].strip
+      blog = params[:blog].strip
+
+      if blog.start_with?("http://")
+        blog["http://"] = ""
+      elsif blog.start_with?("https://")
+        blog["https://"] = ""
+      end
+
+      if blog.end_with?("/")
+        blog = blog.chop
+      end
+
+      session[:feed_url]=feed
+      session[:tumblr_url]=blog
 
       consumer_key = "eehMnjMSA762fptNBld3RkMMeK8EirOnnYwVqVxY0Ycxpu3w4C"
       secret = "w8pNFvkvI6pPEhOhZBpl9SRTxgXYSoHIDnQUe6gbrOdU2GXygV"

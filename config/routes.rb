@@ -6,8 +6,6 @@ TumblrImporter::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  root :to => 'main#start'
-
   match 'import' => 'import#request_auth'
   match 'import/auth' => 'import#request_auth'
   match 'import/authorized' => 'import#authorized'
