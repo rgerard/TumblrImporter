@@ -59,91 +59,45 @@
 
                 <div id="tab1" class="tab_content contact">
 
-	                <h3>The following posts were successfully migrated to Tumblr</h3>
+	              <h3>Congratulations! The following posts were successfully migrated to Tumblr</h3>
 
-                  <p>
-	                <table>
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Date</th>
-							</tr>
-						</thead>
-						<tbody>
+                  <p>If this worked well for you, <a href="http://twitter.com/home?status=I%20migrated%20to%20Tumblr%20using%20http://weebly2tumblr.com" target="_blank">tweet about it!</a></p>
 
-                        <% @feed_arr.each do |post| %>
-                          <tr>
-                            <td><%= post["title"] %></td>
-                            <td><%= post["pubDate"] %></td>
-                          </tr>
-                        <% end %>
+                      <p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-						</tbody>
-					</table>
-                  </p>
+                            <% @feed_arr.each do |post| %>
+                              <tr>
+                                <td><%= post["title"] %></td>
+                                <td><%= post["pubDate"] %></td>
+                              </tr>
+                            <% end %>
+
+                            </tbody>
+                        </table>
+                      </p>
 	            </div><!--/tab1-->
 
 	            <div id="tab2" class="tab_content about">
 
 	                <h2>About</h2>
 
-	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p>
+	                <p>This app was built by <a href="http://www.ryangerard.net">Ryan Gerard</a>, a software developer who needed a way to migrate his blog from Weebly to Tumblr, and couldn't find a good solution.</p>
 
-	                <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-
-					<h3>Header Level 3</h3>
-
-					<ol>
-					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-					   <li>Aliquam tincidunt mauris eu risus.</li>
+                    <p>If you have question, comments or concerns, feel free to contact me:<br />
+                    <ol>
+                        <li><a href="mailto:ryan.gerard@gmail.com">ryan dot gerard at gmail dot com</a>.</li>
+					    <li><a href="http://twitter.com/dreadpirateryan">@dreadpirateryan on Twitter</a></li>
+                        <li><a href="http://www.ryangerard.net/">Blog</a></li>
 					</ol>
-
-					<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
-
-					<h4>Header Level 4</h4>
-
-					<ul>
-					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-					   <li>Aliquam tincidunt mauris eu risus.</li>
-					</ul>
-
-					<pre><code>#header h1 a {
-						display: block;
-						width: 300px;
-						height: 80px;
-					}
-					</code></pre>
-
-					<table>
-						<thead>
-							<tr>
-								<th>Heading</th>
-								<th>Heading</th>
-								<th>Heading</th>
-								<th>Heading</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-							</tr>
-							<tr>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-							</tr>
-							<tr>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-								<td>Cell Content</td>
-							</tr>
-						</tbody>
-					</table>
+                    </p>
 
 	            </div><!--/tab2-->
 
